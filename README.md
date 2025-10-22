@@ -71,3 +71,10 @@ export default defineConfig([
   },
 ])
 ```
+
+
+
+# make virtual events
+python3 -m venv .venv
+# activate
+source ./.venv/bin/activate
