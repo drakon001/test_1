@@ -1,17 +1,20 @@
 import { Link } from 'react-router-dom'
+import styled from 'styled-components';
 
+
+const Container = styled.div`
+  margin-top: 20px;
+`;
+
+const TopLink = styled(Link)`
+  margin-right: 10px;
+`
 
 export function Home() {
   return (
-    <>
-      <div style={{ marginTop: '20px' }}>
-        <Link to="/page2" style={{ marginRight: '10px' }}>
-          Go to Page2
-        </Link>
-        <Link to="/page3">
-          Go to Page3
-        </Link>
-      </div>
-    </>
+    <Container>
+        <TopLink to="/page2">Go to Page2</TopLink>
+        <Link to="/page3">Go to Page3</Link>
+    </Container>
   )
 }

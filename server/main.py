@@ -1,7 +1,8 @@
-"""_summary_
-
-Returns:
-    _type_: _description_
+"""
+    основной файл сервера
+    задает статичексий сервер для подгрузки бандл +
+    ендпоинты из  server.api.endpoints 
+    и обработчик ошибок валидации
 """
 
 from fastapi import FastAPI, status
@@ -10,6 +11,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
 from server.api.endpoints import router as api_router
 import os
+
+from server.models.types import ErrorResponse
 
 server = FastAPI(
     title="My FastAPI Project",
@@ -45,7 +48,7 @@ async def serve_spa(path_name: str):
 @server.exception_handler(RequestValidationError)
 async def validation_exception_handler(request, exc: RequestValidationError):
     """Обработка ошибок валидации Pydantic - всегда возвращает 400"""
-    error_messages = {}
+    error_messages: ErrorResponse = {}
     
     for error in exc.errors():
         field = error['loc'][-1] if error['loc'] else 'unknown'

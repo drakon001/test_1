@@ -1,11 +1,15 @@
-from fastapi import APIRouter, HTTPException
-from server.db.storage import Storage
-from server.models.schemas import ErrorResponse, ResponceHistoryBase, SubmissionData, SubmitRequest, SuccessResponse
+from fastapi import APIRouter
+from server.db.MongoStorage import MongoStorage
 import asyncio
 import random
 from datetime import datetime
 
+from server.models.schemas import SubmitRequest
+from server.models.types import ErrorResponse, ResponceHistoryBase, SubmissionData, SuccessResponse
+
 router = APIRouter()
+
+storage = MongoStorage()
 
 @router.post("/submit",  response_model=SuccessResponse | ErrorResponse)
 async def submit_form(request: SubmitRequest) -> SuccessResponse | ErrorResponse:
@@ -16,12 +20,12 @@ async def submit_form(request: SubmitRequest) -> SuccessResponse | ErrorResponse
         "date": request.date,
         "created_at": datetime.now()
     }
-    Storage.append(submission_data)
-    data = Storage.filter(request)
+    storage.append(submission_data)
+    data = storage.filter(request)
     result:SuccessResponse =  {"success": True, "data": data}
     return result
 
 @router.get("/history")
 async def get_history():
-    history: ResponceHistoryBase =  {"items": Storage.history()}
+    history: ResponceHistoryBase =  {"items": storage.history()}
     return history
