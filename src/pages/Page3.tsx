@@ -96,6 +96,7 @@ const Page3: React.FC = () => {
                   <th>Имя</th>
                   <th>Фамилия</th>
                   <th>Количество отправок</th>
+                  <th>Полное имя</th>
                 </tr>
               </thead>
               <tbody>
@@ -110,6 +111,9 @@ const Page3: React.FC = () => {
                       <span className={`count-badge ${item.count > 5 ? 'high' : item.count > 2 ? 'medium' : 'low'}`}>
                         {item.count}
                       </span>
+                    </td>
+                    <td className="fullname-cell">
+                      {item.first_name} {item.last_name}
                     </td>
                   </tr>
                 ))}
