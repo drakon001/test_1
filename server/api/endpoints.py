@@ -1,9 +1,11 @@
-from fastapi import APIRouter, HTTPException
-from server.db.storage import Storage
-from server.models.schemas import ErrorResponse, ResponceHistoryBase, SubmissionData, SubmitRequest, SuccessResponse
+from fastapi import APIRouter
+from server.db.MemoryStorage import Storage
 import asyncio
 import random
 from datetime import datetime
+
+from server.models.schemas import SubmitRequest
+from server.models.types import ErrorResponse, ResponceHistoryBase, SubmissionData, SuccessResponse
 
 router = APIRouter()
 

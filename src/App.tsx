@@ -1,20 +1,15 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Home } from './pages/Home'
-import Page2  from './pages/Page2'
-import Page3  from './pages/Page3'
-import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { routes } from './routes'
 
-function App() {
+const App = () => {
   return (
-    <Router>
-      <div className="App">
+    <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/page2" element={<Page2 />} />
-          <Route path="/page3" element={<Page3 />} />
+          {Object.entries(routes).map(([path, Component]) => (
+            <Route key={path} path={path} element={<Component />} />
+          ))}
         </Routes>
-      </div>
-    </Router>
+    </BrowserRouter>
   )
 }
 
