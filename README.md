@@ -1,4 +1,4 @@
-# устанока
+# Install order
 ## Frontend
 npm install 
 npm run build
